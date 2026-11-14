@@ -1,0 +1,369 @@
+/*
+	Your own styles. Edit this file, not main.css.
+	main.css is the Editorial template. This file loads after it,
+	so anything here wins.
+*/
+
+/* ------------------------------------------------------------
+   1. COLOURS
+   Change these and the whole site updates.
+   Tip: pick colours at https://htmlcolorcodes.com
+   The template's original red was #f56a6a.
+   ------------------------------------------------------------ */
+:root {
+	--accent:        #2f855a;  /* links, buttons, heading underlines */
+	--accent-hover:  #38a169;  /* button colour when you hover */
+	--accent-active: #276749;  /* button colour when you click */
+	--accent-soft:   rgba(47, 133, 90, 0.15);  /* light tint for focus and hover */
+	--accent-faint:  rgba(47, 133, 90, 0.05);  /* very light tint */
+
+	--todo-bg:       #fff6d6;  /* highlight on text you still need to write */
+	--todo-border:   #e0b400;
+	--measured:      #2f855a;  /* "Measured" label */
+	--planned:       #7f888f;  /* "Planned" label */
+}
+
+/* ------------------------------------------------------------
+   2. PLACEHOLDERS
+   Anything with class="todo" shows up highlighted.
+   When you replace the text, delete class="todo" as well.
+   ------------------------------------------------------------ */
+.todo {
+	background: var(--todo-bg);
+	border-left: 3px solid var(--todo-border);
+	padding: 0.15em 0.5em;
+}
+
+span.todo,
+td.todo {
+	border-left: 0;
+	border-bottom: 2px dashed var(--todo-border);
+}
+
+/* ------------------------------------------------------------
+   3. FIGURES (images, diagrams, screenshots)
+   ------------------------------------------------------------ */
+figure {
+	margin: 0 0 2em 0;
+}
+
+figure .image.fit {
+	margin-bottom: 0.75em;
+}
+
+figure .image img {
+	border: solid 1px rgba(210, 215, 217, 0.75);
+}
+
+figcaption {
+	font-size: 0.9em;
+	color: #7f888f;
+}
+
+/* ------------------------------------------------------------
+   4. "MEASURED" AND "PLANNED" LABELS
+   Helps readers tell tested results apart from future work.
+   ------------------------------------------------------------ */
+.status {
+	display: inline-block;
+	font-size: 0.7em;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: #ffffff;
+	border-radius: 0.375em;
+	padding: 0.1em 0.6em;
+	margin-left: 0.5em;
+	vertical-align: middle;
+}
+
+.status.measured { background: var(--measured); }
+.status.planned  { background: var(--planned); }
+
+/* ------------------------------------------------------------
+   5. SMALL LAYOUT FIXES
+   ------------------------------------------------------------ */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Stops section headings from hiding under the top of the screen
+   when you jump to them from the menu. */
+#main section[id],
+#main h3[id],
+#main h4[id],
+#main li[id] {
+	scroll-margin-top: 2em;
+}
+
+/* Numbered workflow steps */
+ol.steps > li {
+	margin-bottom: 1.5em;
+}
+
+/* Lets wide tables scroll sideways on phones */
+.table-wrapper {
+	overflow-x: auto;
+}
+
+/* ------------------------------------------------------------
+   6. PAGE TABS (Report / Appendices / References)
+   The current page's link has aria-current="page".
+   ------------------------------------------------------------ */
+.report-tabs {
+	margin: 0 0 3em 0;
+	box-shadow: inset 0 -1px 0 rgba(210, 215, 217, 0.75);
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+}
+
+.report-tabs ul {
+	display: flex;
+	gap: 2em;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+}
+
+.report-tabs li {
+	padding: 0;
+}
+
+.report-tabs a {
+	display: block;
+	padding: 1.25em 0 0.85em 0;
+	border-bottom: solid 3px transparent;
+	color: #7f888f;
+	font-family: "Roboto Slab", serif;
+	font-size: 0.8em;
+	font-weight: 700;
+	letter-spacing: 0.075em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.report-tabs a:hover {
+	color: var(--accent);
+}
+
+.report-tabs a[aria-current="page"] {
+	color: var(--accent);
+	border-bottom-color: var(--accent);
+}
+
+@media screen and (max-width: 736px) {
+	.report-tabs ul { gap: 1.5em; }
+	.report-tabs { margin-bottom: 2em; }
+}
+
+/* ------------------------------------------------------------
+   7. APPENDICES PAGE
+   ------------------------------------------------------------ */
+
+/* Contents cards at the top of the page */
+.appendix-index {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1em;
+	list-style: none;
+	margin: 0 0 3em 0;
+	padding: 0;
+}
+
+.appendix-index li {
+	padding: 0;
+}
+
+.appendix-index a {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	height: 100%;
+	padding: 1em 1.25em;
+	border: solid 1px rgba(210, 215, 217, 0.75);
+	border-radius: 0.375em;
+	border-bottom-width: 1px;
+	color: #3d4449;
+	text-decoration: none;
+	transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.appendix-index a:hover {
+	border-color: var(--accent);
+	background: var(--accent-faint);
+	color: #3d4449;
+}
+
+.appendix-index .letter {
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25em;
+	height: 2.25em;
+	border-radius: 0.375em;
+	background: var(--accent);
+	color: #ffffff;
+	font-family: "Roboto Slab", serif;
+	font-weight: 700;
+}
+
+.appendix-index .title {
+	font-family: "Roboto Slab", serif;
+	font-size: 0.9em;
+	line-height: 1.4;
+}
+
+@media screen and (max-width: 736px) {
+	.appendix-index { grid-template-columns: 1fr; }
+}
+
+/* Space between appendices */
+.appendix {
+	margin-bottom: 3em;
+}
+
+/* Dense appendix tables: slightly smaller text, field names on one line */
+.appendix table {
+	font-size: 0.9em;
+}
+
+td code {
+	white-space: nowrap;
+}
+
+/* Long code such as file hashes wraps instead of running off the screen */
+p code {
+	overflow-wrap: anywhere;
+}
+
+/* "Back to top" link at the end of each appendix */
+.back-to-top {
+	font-size: 0.8em;
+	text-transform: uppercase;
+	letter-spacing: 0.075em;
+	font-family: "Roboto Slab", serif;
+	font-weight: 700;
+	text-decoration: none;
+	border-bottom: 0;
+}
+
+.back-to-top:before {
+	content: "\2191\00a0";
+}
+
+/* Expandable block (e.g. the full system prompt) */
+details {
+	margin: 0 0 2em 0;
+	border: solid 1px rgba(210, 215, 217, 0.75);
+	border-radius: 0.375em;
+}
+
+details > summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	padding: 0.85em 1.25em;
+	list-style: none;
+	color: var(--accent);
+	font-family: "Roboto Slab", serif;
+	font-size: 0.8em;
+	font-weight: 700;
+	letter-spacing: 0.075em;
+	text-transform: uppercase;
+}
+
+details > summary::-webkit-details-marker {
+	display: none;
+}
+
+details > summary:after {
+	content: "\25BE";
+	font-size: 1.25em;
+	transition: transform 0.2s ease;
+}
+
+details[open] > summary {
+	border-bottom: solid 1px rgba(210, 215, 217, 0.75);
+}
+
+details[open] > summary:after {
+	transform: rotate(180deg);
+}
+
+details pre {
+	margin: 0;
+}
+
+details pre code {
+	margin: 0;
+	border: 0;
+	border-radius: 0 0 0.375em 0.375em;
+	max-height: 32em;
+	overflow-y: auto;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+/* Expandable block holding text and lists (e.g. the judge evaluation steps) */
+details .details-body {
+	padding: 1.5em 1.5em 0.5em 1.5em;
+}
+
+details .details-body h4 {
+	margin: 2em 0 0.75em 0;
+	padding-top: 1.5em;
+	border-top: solid 1px rgba(210, 215, 217, 0.75);
+}
+
+details .details-body h4 .threshold {
+	margin-left: 0.5em;
+	color: #7f888f;
+	font-family: "Open Sans", sans-serif;
+	font-size: 0.85em;
+	font-weight: 400;
+	letter-spacing: 0;
+	text-transform: none;
+}
+
+details .details-body ol,
+details .details-body ul {
+	margin-bottom: 1.5em;
+}
+
+details .details-body li {
+	padding-left: 0.25em;
+	margin-bottom: 0.4em;
+}
+
+/* ------------------------------------------------------------
+   8. REFERENCES PAGE (APA style: hanging indent, no numbers)
+   ------------------------------------------------------------ */
+.reference-list {
+	list-style: none;
+	margin: 0 0 2em 0;
+	padding: 0;
+}
+
+.reference-list li {
+	padding: 0.5em 0.75em 0.5em 2.75em;
+	text-indent: -2em;
+	margin-bottom: 0.75em;
+	border-radius: 0.375em;
+	overflow-wrap: anywhere;
+	transition: background-color 0.5s ease;
+}
+
+/* Highlights a reference when you arrive from a citation link */
+.reference-list li:target {
+	background: var(--accent-soft);
+}
+
+/* Standalone report navigation: works without the original HTML5 UP JavaScript bundle. */
+.report-menu-toggle {position:fixed;top:12px;left:12px;z-index:10002;background:#225b42;color:#fff!important;border:0;box-shadow:none;font:600 13px 'Open Sans',sans-serif;letter-spacing:0;text-transform:none;border-radius:7px;padding:9px 14px;height:auto;line-height:1.4;cursor:pointer}
+.report-menu-toggle:hover {background:#327a59}
+#menu .opener {cursor:pointer}
+#menu .opener:focus-visible,.report-menu-toggle:focus-visible {outline:3px solid #6cae8e;outline-offset:3px}

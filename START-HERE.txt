@@ -1,0 +1,15 @@
+ELICIT GREEN - GITHUB-READY REPORT SITE
+
+PREVIEW
+1. Extract the ZIP.
+2. Open index.html in a browser. The site works without a backend.
+
+PUBLISH SAFELY IN EXISTING REPOSITORY
+1. Open the existing repository in VS Code; make a new branch.
+2. Copy index.html, appendices.html, references.html, and assets/ from this package into the repository root. Merge assets rather than deleting unrelated folders.
+3. Review git status and git diff. Never add .env, .venv, credentials or local data.
+4. Stage only the website files and commit. Push the new branch and open a pull request.
+5. GitHub Pages publication depends on the repository's configured publishing source.
+
+This package includes the final workload distribution in the sidebar on all three pages.
+The weighted matrix and sensitivity analysis are in Appendix G.

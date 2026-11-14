@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+	<rect width="1200" height="675" fill="#f5f6f7"/>
+	<rect x="12" y="12" width="1176" height="651" fill="none" stroke="#c4c9cc" stroke-width="4" stroke-dasharray="18 12"/>
+	<g fill="none" stroke="#9fa3a6" stroke-width="10" stroke-linejoin="round">
+		<rect x="510" y="230" width="180" height="140" rx="12"/>
+		<circle cx="555" cy="275" r="16"/>
+		<path d="M520 360 l55 -55 40 40 30 -30 45 45"/>
+	</g>
+	<text x="600" y="440" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" fill="#7f888f">Your image goes here</text>
+	<text x="600" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#9fa3a6">Put the file in assets/images/ and change the src</text>
+</svg>

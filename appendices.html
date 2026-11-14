@@ -1,0 +1,775 @@
+<!DOCTYPE HTML>
+
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+
+	HOW TO EDIT THIS PAGE
+	- Highlighted yellow text has class="todo". Replace the words, then delete class="todo".
+	- Each appendix is a <section class="appendix">. Copy one to add another,
+	  and add a matching card to the list at the top and a link in the sidebar.
+	- Citations link to references.html#ref-... so readers can jump to the full reference.
+	- See EDITING-GUIDE.md for more.
+-->
+<html lang="en">
+<head>
+<title>Appendices | Elicit Green CDE4301</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Supporting documentation for the Elicit Green CDE4301 interim project." name="description"/>
+<link href="assets/css/main.css" rel="stylesheet"/>
+<link href="assets/css/custom.css?v=20261113-template-box" rel="stylesheet"/>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+<!-- ==================== MAIN CONTENT ==================== -->
+<div id="main">
+<div class="inner">
+<!-- Header bar: project name on the left, links on the right -->
+<header id="header">
+<a class="logo" href="index.html#top"><strong>SSC-405 Interim Report</strong></a>
+<ul class="icons">
+<!-- Replace # with your links, or delete the line -->
+<li><a class="icon fa-github" href="https://github.com/Ekko-Technology/sustainability-report-rag" rel="noopener" target="_blank"><span class="label">GitHub repository</span></a></li>
+<li><a class="icon fa-file-text-o" href="index.html#top"><span class="label">Read project report</span></a></li>
+</ul>
+</header>
+<!-- ==================== PAGE TITLE AND CONTENTS ==================== -->
+<section id="appendices">
+<header class="main" id="top">
+<h1>Appendices</h1>
+</header>
+<p>Supporting material for the solution and testing sections.</p>
+<ul class="appendix-index">
+<li><a href="#appendix-schema"><span class="letter">A: </span><span class="title">Initiative Schema and Source Mapping</span></a></li>
+<li><a href="#appendix-prompt"><span class="letter">B: </span><span class="title">System Prompt</span></a></li>
+<li><a href="#appendix-cases"><span class="letter">C: </span><span class="title">Controlled Test Case Inventory</span></a></li>
+<li><a href="#appendix-evaluation"><span class="letter">D: </span><span class="title">Evaluation Configuration and Evidence</span></a></li>
+<li><a href="#appendix-usability"><span class="letter">E: </span><span class="title">Usability Testing Evidence</span></a></li>
+<li><a href="#appendix-code"><span class="letter">F: </span><span class="title">Source Code Guide</span></a></li><li><a href="#appendix-matrix"><span class="letter">G: </span><span class="title">Proposed Concept-Selection Scoring</span></a></li>
+</ul>
+</section>
+<!-- ==================== APPENDIX A ==================== -->
+<section class="appendix" id="appendix-schema">
+<header class="major">
+<h2>Appendix A: Initiative Schema and Source Mapping</h2>
+</header>
+<p>The submission form (<a href="references.html#ref-ascott-form">Ascott Limited, n.d.</a>) provides the core collection fields. Analysis of sustainability report narratives (<a href="references.html#ref-ascott-report">Ascott Limited, 2025b</a>) informed the more detailed structure for people, organisations and impact measures. This table documents those sources alongside implementation choices in the current record schema. Source material informed the design; it does not prescribe the application’s data types or validation rules.</p>
+<p>Form page numbers are PDF pages, as the form has no printed page numbers. Report page numbers are the printed page numbers; the PDF page is one higher because of the cover.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th scope="col">Schema field</th>
+<th scope="col">Current structure</th>
+<th scope="col">Source</th>
+<th scope="col">Design interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>initiative_name</code></td>
+<td>Text or null</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q4, p. 3)</a></td>
+<td>Retains the initiative name as a separate field.</td>
+</tr>
+<tr>
+<td><code>cluster_country</code></td>
+<td>List of approved values</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q1, p. 2)</a></td>
+<td>Retains multiple cluster/country selections using an approved list.</td>
+</tr>
+<tr>
+<td><code>property_name</code></td>
+<td>Account identity field</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q2, p. 3)</a></td>
+<td>Retains the reporting property, but fills it from the authenticated account rather than collecting it in chat.</td>
+</tr>
+<tr>
+<td><code>properties</code></td>
+<td>List of approved values</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q3, p. 3)</a></td>
+<td>Replaces free-text additional property names with a list of approved other properties.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>Text or null</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q5, p. 3)</a></td>
+<td>Retains a factual description of what happened.</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>Text or null</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q6, p. 3)</a></td>
+<td>Retains dates or periods. The prompt preserves partial dates without adding an assumed year.</td>
+</tr>
+<tr>
+<td><code>participants</code></td>
+<td>List of group and count entries</td>
+<td><a href="references.html#ref-ascott-report">Ascott Limited (2025b, p. 10)</a>, Play–Learn–Give</td>
+<td>The narrative distinguishes 74 volunteers from 50 children receiving support. Separate participant entries preserve this distinction. Unknown or approximate counts remain null under the prompt rules.</td>
+</tr>
+<tr>
+<td><code>beneficiaries</code></td>
+<td>List of group and count entries</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q11, p. 4</a>; <a href="references.html#ref-ascott-report">2025b, p. 10)</a></td>
+<td>The form already mentions beneficiaries within Other impact metrics. The schema gives beneficiaries a dedicated field, informed by narratives describing who received support.</td>
+</tr>
+<tr>
+<td><code>partners</code></td>
+<td>List of name and role entries</td>
+<td><a href="references.html#ref-ascott-report">Ascott Limited (2025b, p. 47)</a>, Soap for Hope</td>
+<td>The narrative describes Diversey and Heysprouts and their involvement, supporting separate organisation and role fields.</td>
+</tr>
+<tr>
+<td><code>impact_metrics</code></td>
+<td>List of metric, value and unit entries</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q7, p. 3; Q8–Q11, p. 4</a>; <a href="references.html#ref-ascott-report">2025b, p. 47)</a></td>
+<td>Generalises separate impact questions into a flexible list. Soap for Hope reports 50 kg of used soap and 800 hygiene bars as distinct measures, illustrating why labels, quantities and units must remain separate.</td>
+</tr>
+<tr>
+<td><code>cares_pillar</code></td>
+<td>One supported pillar or null</td>
+<td><a href="references.html#ref-ascott-form">Ascott Limited (n.d., Q12, p. 4)</a></td>
+<td>Retains the five CARES categories. The current application stores one user-confirmed pillar, whereas the source form permits multiple selections.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Differences from the original form</h3>
+<ul>
+<li>The form permits multiple CARES pillars; the current schema stores one confirmed pillar.</li>
+<li>The form requests up to five photos (<a href="references.html#ref-ascott-form">Ascott Limited, n.d., Q13, p. 5</a>); photo upload is not represented in the current initiative schema.</li>
+<li>Name, email and the reporting property come from account identity. The supplied form PDF does not show a separate email question, so email is not attributed to a numbered form question here.</li>
+<li>Approved property lists, nullable values and exact non-negative participant counts are application design decisions, rather than requirements established by the report narratives.</li>
+</ul>
+<h3>Source documents</h3>
+<ul>
+<li><a href="references.html#ref-ascott-form">Ascott Limited (n.d.)</a>: the <em>2025 Initiatives Submission (Susty Report)</em> form, supplied as <code>2025 Susty Report_MS Form.pdf</code>.</li>
+<li><a href="references.html#ref-ascott-report">Ascott Limited (2025b)</a>: <em>Sustainability Report 2025</em>, supplied as <code>Ascott-SR-2025.pdf</code>.</li>
+</ul>
+<p>The internal Excel submission export (<a href="references.html#ref-ascott-excel">Ascott Limited, 2025a</a>) also informed the original field selection. It is referenced separately and is not reproduced in this appendix.</p>
+<a class="back-to-top" href="#top">Back to top</a>
+</section>
+<!-- ==================== APPENDIX B ==================== -->
+<section class="appendix" id="appendix-prompt">
+<header class="major">
+<h2>Appendix B: System Prompt</h2>
+</header>
+<p>This is the system prompt used for the final evaluation runs reported in Appendices C and D (<code>extraction-pillar-confirm-r5</code> and <code>-r6</code>, 13 November 2026). It adds two-step CARES pillar confirmation and tighter rules for participants, beneficiaries, partner roles, impact metrics and one question per reply. The opening greeting is supplied separately by the application.</p>
+<p>Source: <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/prompts.py"><code>backend/prompts.py</code></a> (<code>SYSTEM_PROMPT</code>) at commit <code>2ad0e1f</code>. Prompt text SHA-256, as logged in the runs: <code>66b5a186bff7dd6e43eefe239fa96eedfc53a1fe5c48176e961eee6079dd8c37</code>.</p>
+<details>
+<summary>Read the full system prompt</summary>
+<pre><code># Role and goal
+
+You collect one sustainability initiative for Ascott CARES.
+
+Help the user describe what happened, who was involved, and what impact was reported. Build an accurate story record through a brief, warm conversation.
+
+# Scope and output
+
+Return the complete updated story state, assistant_message, and status using the application's response schema.
+
+The story fields are:
+- initiative_name
+- cluster_country
+- properties
+- date
+- description
+- participants
+- partners
+- beneficiaries
+- impact_metrics
+- cares_pillar
+
+The user's name, email, and own property come from their account. Never ask for them or add them to the story state.
+
+The user's own property, the current stored state, and any "Reporting reference date" message are context supplied by the application, not statements by the user. Never record the reporting reference date as the initiative's date.
+
+# Initiative name, clusters, and properties
+
+The opening message asks for the initiative name, the clusters or countries involved, and the other participating properties. Ask about these three before the rest of the story. If one is still missing, ask about only that one; never ask about two of them in one question. Asking first never means recording later: always record every other fact the user has already given, even while these three are still missing.
+
+When the user's answer clearly gives a value, record it and move on. Do not ask the user to confirm what they just said clearly, and do not ask whether more clusters or properties took part unless the answer was unclear.
+
+- initiative_name: only the name the user gives the initiative, without places, dates, or property names they mention alongside it ("Beach Cleanup Day in Singapore" gives "Beach Cleanup Day"). A named event the user says they hosted, organised, or ran is the initiative name, including a year that is part of its title ("we hosted Earth Hour Run 2024" gives "Earth Hour Run 2024"). An occasion the initiative celebrates or marks is not its name ("a tree planting to mark International Volunteer Day" has no name yet). Never derive a name from a description of what happened; if no name was given, leave it null and ask for it.
+- cluster_country: only values from the schema's list. Map a clear answer such as "Singapore" or "KL, Malaysia" to the matching listed value. If a place is not in the list or is ambiguous, ask which listed cluster it belongs to.
+- properties: the OTHER properties that took part, only values from the schema's list. Never include the user's own property. Match a property only when the user's wording clearly identifies one listed name. If a name is misspelled, partial, or could match several properties, ask which one they mean instead of guessing. A number of properties or a region without property names ("8 properties in Penang") names no property: leave properties unchanged and ask which ones took part. "Only our property" or "none" means []. A property the user names that is not in the list cannot be recorded; say so briefly and mention it in the description.
+
+# Recording facts
+
+Record only facts explicitly supplied by the user in this conversation.
+
+Extract all relevant facts from each message. Preserve existing facts unless the user corrects or retracts them. Corrections replace the earlier value; retractions clear it.
+
+Copy names exactly as the user wrote them: spelling, spacing, punctuation, and any abbreviation in brackets ("Green Hands Society (GHS)" stays "Green Hands Society (GHS)"; "Eco -Fair Day" keeps its spacing).
+
+Unknown scalar values remain null. Unknown or absent participants, partners,
+beneficiaries, and impact_metrics remain empty arrays []. Never use null or a
+string in place of these arrays.
+
+Keep descriptions concise and factual. The description is a short account of what happened in the user's words: keep who, what, when, and how many, even when the same facts are also stored in other fields. Preserve date precision: “June” remains “June” without an invented year. Write a complete date as ISO YYYY-MM-DD, so “12th June 2026” becomes "2026-06-12"; leave a partial date in the user's own words.
+
+Each participant is {"group": string or null, "count": integer or null}.
+Each partner is {"name": string or null, "role": string or null}.
+Each beneficiary is {"group": string or null, "count": integer or null}.
+Keep distinct groups and organisations as separate entries. Preserve their names,
+and take each partner's role only from what the user says it did (below). Do not confuse attendees,
+organisations helping deliver the initiative, and people receiving its benefits.
+- participants: the people who carried out or attended the initiative as
+  contributors, such as staff, volunteers, or guests who took part. Keep the
+  user's own group wording, including qualifiers ("12 interns from the Hanoi
+  office" gives group "interns from the Hanoi office"); do not shorten it to a
+  generic word.
+- beneficiaries: the people the initiative helped, served, taught, or gave
+  something to ("we tutored 30 children" gives beneficiary group "children",
+  count 30). Record them as beneficiaries, not participants, unless the user
+  also says they helped carry out the initiative.
+- partners: outside organisations that worked with the initiative or received
+  its donations. An organisation is a partner, not a beneficiary. Its role is
+  what the user says it did ("the council, which supplied the saplings" gives
+  role "supplied the saplings"); "collaborated with" or "in collaboration with"
+  gives role "collaborator". Leave role null only when the user states nothing
+  the organisation did.
+A group without a count, such as “Staff”, has count null. Counts must be exact,
+non-negative integers: never turn unknown into zero. For an approximation such
+as “about 20 volunteers”, preserve that whole phrase in group and leave count
+null. “For employees” identifies an intended audience but does not necessarily
+confirm who attended.
+
+Explicit “no partners” and unknown partners both use []. Preserve an explicit
+absence in the factual description, so it can be distinguished from unknown.
+Never add a partner named "None". Do not infer that an empty array means none.
+A participant headcount belongs in participants; do not duplicate it as an
+impact metric unless the user reports it as a separate impact measure.
+
+# Impact metrics
+
+Each metric contains metric, value, and unit.
+
+The unit is the plain unit or counted noun, such as "kg", "hours", or "bottles". Put descriptive qualifiers in the metric label, for example “200 plastic bottles collected” becomes metric "Plastic bottles collected", value 200, unit "bottles".
+
+A headcount of participants belongs in participants. Do not also add it as an impact metric unless the user reports it as a separate impact measure.
+
+Preserve the supplied number, unit, currency, and approximation. For “over 250 participants,” preserve “over” in the metric label.
+
+Every count of things planted, collected, donated, delivered, or held belongs in impact_metrics, not only in the description.
+
+Record each distinct metric once. Repeated mentions of 60 kg collected describe one metric, not two.
+
+Keep different measures separate, such as blood units donated and number of donors. Matching values do not make them the same measure.
+
+A count of things produced, delivered, or achieved, such as "45 mangroves were planted" or "4 talks were held", is a metric when its counted noun is clear: metric "Mangroves planted", value 45, unit "mangroves". Record it as a metric even if it also appears in the description. People counts belong in participants or beneficiaries instead.
+
+If a number has no clear meaning or unit, ask what it represents before recording it as a metric.
+
+Do not calculate, extrapolate, convert currencies, or invent quantities.
+
+Distinguish goals, plans, and expected benefits from achieved results. “We hope to reduce waste” is a goal, not evidence that waste was reduced. “We haven’t measured results yet” does not mean impact was zero.
+
+# Choosing the next question
+
+Ask about one topic at a time.
+
+If a CARES pillar is awaiting confirmation (see "CARES pillar"), the next question is that confirmation, before anything else.
+
+Otherwise, choose the next question from information that is missing or unclear:
+0. Initiative name, clusters or countries, and other participating properties.
+1. What actually happened, if the description is vague.
+2. Who participated.
+3. Reported impact or available measurements.
+4. Other relevant details, such as date, partners, or beneficiaries.
+5. CARES pillar, only if cares_pillar is still null and the user has not named one.
+
+Use judgment about relevance. Do not force volunteer hours, donations, or other metrics onto initiatives where they do not apply.
+
+Do not ask for information already supplied. After the user says “skip,” “I’m unsure,” or “I don’t know,” leave that information unknown and move to another relevant topic. Do not repeatedly ask for it.
+
+If the user describes multiple initiatives, ask which one to collect before combining their details.
+
+# CARES pillar
+
+The CARES pillars are Community, Alliance, Respect, Environment, and Supply Chain.
+
+Only populate cares_pillar with one of the supported values: Community, Alliance,
+Respect, Environment, or Supply Chain.
+
+The pillar is recorded in two steps: the user names it, then confirms it.
+
+1. When the user names a supported pillar, either unprompted (“It supports the
+   Environment pillar”) or in answer to a pillar question, do NOT record it yet.
+   Leave cares_pillar unchanged and make your next question the confirmation,
+   naming that pillar, for example: “Just to confirm, the CARES pillar is
+   Environment?” Still record every other fact in the same message.
+2. Record cares_pillar only when the user's reply to that confirmation question
+   affirms the pillar you named (“Yes”, “Correct”, “That's right”). A reply that
+   rejects it and names a different pillar (“No, it's Respect”) is not an
+   affirmation: leave cares_pillar unchanged and ask to confirm the newly named
+   pillar (“Just to confirm, the CARES pillar is Respect?”). If the reply is “no”
+   or unsure, leave cares_pillar unchanged and do not press again.
+
+Use the conversation history to tell whether a pillar is awaiting confirmation:
+it is when your previous message asked to confirm a named pillar. You may
+suggest a suitable pillar only when the user has not named one; a suggestion
+by the assistant is never a selection, and the user naming it afterwards still
+needs confirmation. Once cares_pillar is recorded, never ask about the pillar
+again unless the user explicitly corrects it; a correction goes through the
+same two steps.
+
+# Follow-up and completion
+
+Choose the status and assistant_message together.
+
+When status is collecting:
+- assistant_message must contain exactly one short, direct question ending with a question mark. Never add a second question, even a short one: if two things are missing, ask about one now and the other next turn. A pillar confirmation is the whole question for that turn.
+- Do not ask the user to confirm facts they stated clearly (names, dates, counts); only the CARES pillar needs confirmation.
+- A brief acknowledgement may precede the question.
+- An acknowledgement or summary alone is insufficient because the user needs a clear next step.
+
+After extracting facts, continue with the next relevant unanswered topic. Receiving a detailed message or several metrics does not by itself end collection.
+
+When there are no useful questions left, briefly summarise the story and ask whether the user wants to finish or correct anything. This remains a collecting response and must include one question.
+
+If the user says “done” or confirms they want to finish, preserve known facts and accepted unknowns, use the completion status defined by the application's schema, and give a brief completion message. Do not ask another collection question. A pillar still awaiting confirmation stays unrecorded.
+
+Never invent facts to make a record appear complete.
+
+# Examples
+
+&lt;example&gt;
+User: We donated RMB 1,013.50 to the charity and recorded 5 volunteer hours.
+Context: The event, date, participants, and partner are already known. Beneficiaries have not been identified.
+Expected behaviour: Add both metrics, preserve prior facts, and continue collecting.
+assistant_message: "Who benefited from the charity’s work?"
+status: collecting
+&lt;/example&gt;
+
+&lt;example&gt;
+User: We haven’t measured any results yet.
+Context: The initiative's goals are known, but its date has not been supplied.
+Expected behaviour: Keep achieved metrics empty, preserve the goals as goals, and move to another relevant topic.
+assistant_message: "When did the transition begin?"
+status: collecting
+&lt;/example&gt;
+
+&lt;example&gt;
+User: We held a coastal cleanup with 40 volunteers and removed 90 kg of litter. It falls under Environment.
+Context: No initiative name has been given yet.
+Expected behaviour: Record the volunteers and the metric, leave cares_pillar null, and ask only for pillar confirmation. Ask for the name in a later turn.
+assistant_message: "Thanks, that's recorded. Just to confirm, the CARES pillar is Environment?"
+status: collecting
+&lt;/example&gt;
+
+&lt;example&gt;
+User: No, it's Community.
+Context: Your previous message asked "Just to confirm, the CARES pillar is Environment?"
+Expected behaviour: The user rejected Environment and named Community, which is not yet confirmed. Leave cares_pillar null.
+assistant_message: "Just to confirm, the CARES pillar is Community?"
+status: collecting
+&lt;/example&gt;
+
+# Check before returning
+
+Ensure that:
+- Every recorded fact is supported by the conversation.
+- Prior facts and corrections are preserved.
+- Metrics are distinct and not duplicated, and every reported count of things is in impact_metrics.
+- People the initiative taught, helped, or served are beneficiaries, not participants.
+- Every participant or beneficiary group the user named ("8 mentors" gives group "mentors") keeps that name; group is null only when the user named no group.
+- Every partner whose action the user described has that action as its role.
+- cares_pillar is set only after the user affirmed your confirmation question for that pillar.
+- Goals are not presented as measured results.
+- A collecting response contains exactly one question.
+- A completion response uses the application's supported completion status.</code></pre>
+</details>
+<a class="back-to-top" href="#top">Back to top</a>
+</section>
+<!-- ==================== APPENDIX C ==================== -->
+<section class="appendix" id="appendix-cases">
+<header class="major">
+<h2>Appendix C: Controlled Test Case Inventory</h2>
+</header>
+<p>The dataset has 12 single-turn cases and 5 multi-turn cases. No case is skipped. Results are from the two final runs on 13 November 2026, <code>extraction-pillar-confirm-r5</code> and <code>-r6</code>, which used identical prompt, datasets and judge (Appendix D). Inputs and expected record contents are not reproduced because some derive from internal source material. Expected records are reviewed draft labels, and some cover only selected fields.</p>
+<p>Result notation: failing metrics are shown with their scores (Field Exact threshold 1.0; Label and Description thresholds 0.7). “Error” means the application rejected the model's reply before scoring, because it asked more than one question; it is counted as a failure, not a skip.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th scope="col">Case ID</th>
+<th scope="col">Test type</th>
+<th scope="col">Expected fields</th>
+<th scope="col">Run r5</th>
+<th scope="col">Run r6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initiative-name</td>
+<td>Single-turn</td>
+<td><code>initiative_name</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Single-turn</td>
+<td><code>description</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>date</td>
+<td>Single-turn</td>
+<td><code>date</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>cares-pillar</td>
+<td>Single-turn</td>
+<td><code>cares_pillar</code></td>
+<td>Pass</td>
+<td>Error: reply asked two questions</td>
+</tr>
+<tr>
+<td>participants</td>
+<td>Single-turn</td>
+<td><code>participants</code></td>
+<td>Pass</td>
+<td>Fail: Label 0.16</td>
+</tr>
+<tr>
+<td>partners</td>
+<td>Single-turn</td>
+<td><code>partners</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>beneficiaries</td>
+<td>Single-turn</td>
+<td><code>beneficiaries</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>blood-impact</td>
+<td>Single-turn</td>
+<td><code>impact_metrics</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>tree-impact</td>
+<td>Single-turn</td>
+<td><code>impact_metrics</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>recycling-impact</td>
+<td>Single-turn</td>
+<td><code>impact_metrics</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>blood-donation-story</td>
+<td>Single-turn</td>
+<td><code>initiative_name</code>, <code>description</code>, <code>date</code>, <code>cares_pillar</code>, <code>participants</code>, <code>partners</code>, <code>beneficiaries</code>, <code>impact_metrics</code></td>
+<td>Fail: Field Exact 0.86, Label 0.37</td>
+<td>Fail: Field Exact 0.86</td>
+</tr>
+<tr>
+<td>education-story</td>
+<td>Single-turn</td>
+<td><code>initiative_name</code>, <code>description</code>, <code>date</code>, <code>cares_pillar</code>, <code>participants</code>, <code>partners</code>, <code>beneficiaries</code>, <code>impact_metrics</code></td>
+<td>Fail: Field Exact 0.71, Label 0.36, Description 0.65</td>
+<td>Error: reply asked two questions</td>
+</tr>
+<tr>
+<td>multi-turn-story-1</td>
+<td>Multi-turn (generated)</td>
+<td><code>date</code>, <code>description</code>, <code>participants</code>, <code>partners</code>, <code>beneficiaries</code>, <code>impact_metrics</code>, <code>cares_pillar</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>pillar-confirmed</td>
+<td>Multi-turn (replay)</td>
+<td><code>date</code>, <code>participants</code>, <code>cares_pillar</code></td>
+<td>Pass</td>
+<td>Error: reply asked two questions</td>
+</tr>
+<tr>
+<td>pillar-pending</td>
+<td>Multi-turn (replay)</td>
+<td><code>date</code>, <code>impact_metrics</code>, <code>cares_pillar</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>pillar-volunteered</td>
+<td>Multi-turn (replay)</td>
+<td><code>date</code>, <code>participants</code>, <code>impact_metrics</code>, <code>cares_pillar</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>pillar-changed</td>
+<td>Multi-turn (replay)</td>
+<td><code>date</code>, <code>impact_metrics</code>, <code>cares_pillar</code></td>
+<td>Pass</td>
+<td>Pass</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Run r5: 15 of 17 cases passed, 2 failed on metrics, 0 execution errors. Run r6: 12 of 17 passed, 2 failed on metrics, 3 execution errors. Twelve cases passed in both runs.</p>
+<p><strong>Test types.</strong> Single-turn cases send one user message after the application's greeting. Generated multi-turn cases send each user message in turn and keep the model's own replies as history. Replay multi-turn cases use the fixture's assistant turns as history, so a state change such as CARES pillar confirmation is tested against a fixed conversation. Only the final structured record is scored; conversational quality and database saving are not scored.</p>
+<p><strong>CARES pillar confirmation.</strong> The pillar is recorded only after the user affirms the assistant's confirmation question, so a pillar named in a single message is expected to remain empty (<code>cares-pillar</code>, <code>blood-donation-story</code>). The four <code>pillar-*</code> replay cases cover confirmation, a pending answer, an unprompted pillar, and a rejected confirmation.</p>
+<p><strong>Unresolved failures.</strong> <code>education-story</code> failed in both runs: the model recorded the students as participants as well as beneficiaries and did not record the three workshops as an impact metric. <code>blood-donation-story</code> failed in both runs for different reasons: once the partner was split into two entries, once the occasion (World Blood Donor Day) was recorded as the initiative name. <code>participants</code> intermittently left the group label empty. Replies asking two questions occurred in 0 and 3 cases. Not scored but observed: the model sometimes guessed specific property names when the input gave only a number of properties.</p>
+<p><strong>Earlier configuration.</strong> Before 13 November 2026 the dataset had 13 cases, three of which were configured to be skipped for malformed labels. Those labels were repaired and the skips removed.</p>
+<a class="back-to-top" href="#top">Back to top</a>
+</section>
+<!-- ==================== APPENDIX D ==================== -->
+<section class="appendix" id="appendix-evaluation">
+<header class="major">
+<h2>Appendix D: Evaluation Configuration and Evidence</h2>
+</header>
+<p>Metrics: Field Exact Match (threshold 1.0), Label Fidelity (0.7) and Description Fidelity (0.7), selected per case from the expected fields. Field Exact Match is a custom code-based DeepEval metric (<a href="references.html#ref-deepeval-custom">Confident AI, n.d.-b</a>). The two fidelity metrics use G-Eval (<a href="references.html#ref-liu-geval">Liu et al., 2023</a>; <a href="references.html#ref-deepeval-geval">Confident AI, n.d.-d</a>); their scores are not percentages of extraction accuracy. Each fidelity judge sees only the fields it scores and follows fixed evaluation steps rather than steps regenerated from criteria on each call, so a correct fact in an unscored field cannot lower its score. Thresholds were not changed during revision.</p>
+<p>The values below are read from the hyperparameters DeepEval saved with each run (<a href="references.html#ref-deepeval-flags">Confident AI, n.d.-c</a>), using DeepEval version 4.3.1 (<a href="references.html#ref-deepeval-software">Confident AI, 2026</a>).</p>
+<div class="box">
+<h3>Judge Evaluation Steps</h3>
+<div>
+<p>Copied from <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/eval/metrics.py"><code>backend/eval/metrics.py</code></a>. SHA-256 of both step lists, as logged in the runs: <code>b33675637af4fbe29ecd4e758f0c59c9be4a4faeb4dfcdd2607cddc30cec7373</code>. Both judges use <code>gpt-4.1-mini</code> and receive the input, the actual output and the expected output, each projected to the fields being judged.</p>
+<h4>Label Fidelity</h4>
+<p><strong>threshold 0.7</strong></p>
+<ol>
+<li>The actual and expected outputs hold only the story fields being judged, drawn from participants (group), partners (role), beneficiaries (group) and impact_metrics (metric, unit). Facts in the input that belong to fields not shown are out of scope: never penalise their absence.</li>
+<li>Match each expected entry to an actual entry in the same field by its count, value, or partner name. A missing expected entry, or an extra actual entry in a field shown, is an error.</li>
+<li>For each matched pair, compare the free-text labels. Casing, plural/singular, paraphrase, and extra detail supported by the input are acceptable. A null, lost, or changed label (who did what, which thing was counted, the unit) is an error.</li>
+<li>Check that each label stays paired with its own count, value, unit, or partner name; swapped values are an error even if the same numbers appear elsewhere.</li>
+<li>Score high only if every shown entry matches with an equivalent label and no error was found.</li>
+</ol>
+<h4>Description Fidelity</h4>
+<p><strong>threshold 0.7</strong></p>
+<ol>
+<li>The actual and expected outputs each hold only a story `description`; other story fields are out of scope and not shown, so do not penalise their absence.</li>
+<li>List the facts in the expected description (who, what, when, where, names, numbers, units). Check each is kept in the actual description; paraphrase is fine.</li>
+<li>Check that every specific fact, number, or name in the actual description is supported by the input.</li>
+<li>Score high only if the meaning is equivalent, no expected fact is lost, and nothing unsupported is added.</li>
+</ol>
+<h4>Field Exact Match</h4>
+<p><strong>threshold 1.0, code-based, no judge</strong></p>
+<ul>
+<li>Scores each structured field present in the expected record, except <code>description</code>; the score is the share of those fields that match.</li>
+<li><code>date</code>, <code>cares_pillar</code>, <code>initiative_name</code> and other scalar fields: whole value compared after trimming edge whitespace and ignoring case.</li>
+<li><code>participants</code> and <code>beneficiaries</code>: the list of counts; <code>partners</code>: the list of names; <code>impact_metrics</code>: the list of numeric values. List order is ignored; the number of entries must match.</li>
+<li>Group labels, partner roles, metric names and units are left to Label Fidelity. Punctuation such as typographic apostrophes is not normalised.</li>
+</ul>
+</div>
+</div>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th scope="col">Evidence item</th>
+<th scope="col">Recorded value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test date, run identifiers and dependency versions</td>
+<td>13 November 2026; <code>extraction-pillar-confirm-r5</code> and <code>extraction-pillar-confirm-r6</code>; DeepEval 4.3.1, OpenAI Python SDK 2.54.0, Python 3.14.4 (WSL)</td>
+</tr>
+<tr>
+<td>Extraction model and judge model</td>
+<td>Extraction: OpenAI <code>gpt-4.1-mini</code> with structured output. Judge: <code>gpt-4.1-mini</code> (<a href="references.html#ref-openai-gpt41mini">OpenAI, n.d.</a>).</td>
+</tr>
+<tr>
+<td>Prompt, dataset and code versions</td>
+<td>SHA-256 of prompt text <code>66b5a186bff7dd6e…</code> (Appendix B); judge steps <code>b33675637af4fbe2…</code>; single-turn dataset <code>39223140f3bae062…</code>; multi-turn dataset <code>aa1ccd934b99323d…</code>. Code: branch <code>feat/eval-and-local-db</code>, <a href="https://github.com/Ekko-Technology/sustainability-report-rag/tree/2ad0e1f">commit <code>2ad0e1f</code></a> (evaluation code from <code>2a5ae67</code>; the runs were executed on that code before it was committed).</td>
+</tr>
+<tr>
+<td>Per-case metric scores and reasons</td>
+<td>Summarised in Appendix C. Full DeepEval exports, including actual outputs and judge reasons: run r5 <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/eval/results/extraction-20261113-165816/test_run_20261113_170207.json"><code>test_run_20261113_170207.json</code></a>; run r6 <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/eval/results/extraction-20261113-170211/test_run_20261113_170603.json"><code>test_run_20261113_170603.json</code></a>. Each run folder also holds the terminal log.</td>
+</tr>
+<tr>
+<td>Pass, fail, skip and execution-error counts</td>
+<td>Denominator: 17 cases per run. r5: 15 passed, 2 failed, 0 skipped, 0 execution errors. r6: 12 passed, 2 failed, 0 skipped, 3 execution errors.</td>
+</tr>
+<tr>
+<td>Representative failures and resulting revisions</td>
+<td>Before revision (run <code>extraction-baseline</code>, 13 cases): 6 passed, 7 failed. Example: in the partners case a correct extra impact metric lowered the label score, so judges now see only the fields they score. Other revisions: the CARES pillar is saved only after user confirmation; expected labels were corrected against the input and prompt rules (for example, unit “trees”, students as beneficiaries); the prompt was tightened for beneficiaries, partner roles, counted metrics and one question per reply. Development runs during revision scored 8, 13, 11 and 14 of 17 before the final configuration.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Results vary between runs of the same configuration because both the extraction model and the judge are language models. Cost per full run was about US$0.005 in judge calls, as reported by DeepEval; extraction calls are not included in that figure.</p>
+<a class="back-to-top" href="#top">Back to top</a>
+</section>
+<!-- ==================== APPENDIX E ==================== -->
+<section class="appendix" id="appendix-usability">
+<header class="major">
+<h2>Appendix E: Usability Testing Evidence</h2>
+</header>
+<h3>Questionnaire and original responses</h3><p>The source workbook contains four anonymised response records, a 1–5 agreement scale (1 = strongly disagree; 5 = strongly agree), and the ten SUS statements adapted to the CARES chatbot. Each entry below is the <em>original</em> response, not the adjusted score.</p><div class="table-wrapper"><table><thead><tr><th>Item</th><th>Statement</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th></tr></thead><tbody><tr><td>Q1</td><td>I think that I would like to use the CARES chatbot frequently.</td><td>3</td><td>3</td><td>4</td><td>4</td></tr><tr><td>Q2</td><td>I found the CARES chatbot unnecessarily complex.</td><td>2</td><td>2</td><td>2</td><td>1</td></tr><tr><td>Q3</td><td>I thought the CARES chatbot was easy to use.</td><td>4</td><td>4</td><td>4</td><td>5</td></tr><tr><td>Q4</td><td>I think that I would need the support of a technical person to be able to use the CARES chatbot.</td><td>2</td><td>1</td><td>1</td><td>1</td></tr><tr><td>Q5</td><td>I found the various functions in the CARES chatbot were well integrated.</td><td>4</td><td>4</td><td>4</td><td>4</td></tr><tr><td>Q6</td><td>I thought there was too much inconsistency in the CARES chatbot.</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td>Q7</td><td>I would imagine that most people would learn to use the CARES chatbot very quickly.</td><td>4</td><td>4</td><td>5</td><td>5</td></tr><tr><td>Q8</td><td>I found the CARES chatbot very cumbersome to use.</td><td>2</td><td>2</td><td>2</td><td>2</td></tr><tr><td>Q9</td><td>I felt very confident using the CARES chatbot.</td><td>3</td><td>4</td><td>4</td><td>4</td></tr><tr><td>Q10</td><td>I needed to learn a lot of things before I could get going with the CARES chatbot.</td><td>2</td><td>2</td><td>2</td><td>2</td></tr></tbody></table></div>
+<h3>Individual scores and supporting measures</h3><div class="table-wrapper"><table><thead><tr><th>Participant</th><th>Group</th><th>Time</th><th>Facilitator-recorded completeness</th><th>SUS</th><th>Preference</th></tr></thead><tbody><tr><td>R1</td><td>Ascott property team</td><td>06:40</td><td>92%</td><td>70</td><td>Slightly prefer static form</td></tr><tr><td>R2</td><td>Ridge Hotel team</td><td>05:55</td><td>100%</td><td>75</td><td>Slightly prefer static form</td></tr><tr><td>R3</td><td>Ascott property team</td><td>04:30</td><td>100%</td><td>80</td><td>Prefer chatbot</td></tr><tr><td>R4</td><td>Ridge Hotel team</td><td>04:05</td><td>100%</td><td>85</td><td>Prefer chatbot</td></tr></tbody></table></div>
+<p><strong>Calculation:</strong> for odd-numbered items, adjusted contribution = response − 1; for even-numbered items, adjusted contribution = 5 − response. SUS = 2.5 × sum of ten adjusted contributions. Individual totals: 70, 75, 80 and 85. Mean = 77.5; Ascott (R1, R3) = 75.0; Ridge (R2, R4) = 80.0. The slide presentation's 72.5 and 82.5 pair averages group respondents by <em>preference</em>, not by employer.</p><p><strong>Interpretation:</strong> two participants slightly preferred the static form and two preferred the chatbot. The four time observations are descriptive only; there is no matched per-participant static-form control. Completeness values (92%, 100%, 100%, 100%) are recorded in the source export but the denominator and independent checking protocol were not supplied, so they are not evidence that D1's target was validated. The original questionnaire export should be retained privately. Exact test scenario, prototype version and assistance conditions remain to be documented.</p>
+<a class="back-to-top" href="#top">Back to top</a>
+</section>
+<!-- ==================== APPENDIX F ==================== -->
+<section class="appendix" id="appendix-code">
+<header class="major">
+<h2>Appendix F: Source Code Guide</h2>
+</header>
+<p>Source code: <a href="https://github.com/Ekko-Technology/sustainability-report-rag">github.com/Ekko-Technology/sustainability-report-rag</a>. The results in this report were produced from branch <code>feat/eval-and-local-db</code> at <a href="https://github.com/Ekko-Technology/sustainability-report-rag/tree/2ad0e1f">commit <code>2ad0e1f</code></a>; the file links below point to that commit, so they show the code as tested.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th scope="col">Area</th>
+<th scope="col">Relevant source files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conversation and prompt</td>
+<td><a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/prompts.py"><code>backend/prompts.py</code></a>, <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/llm.py"><code>backend/llm.py</code></a>, <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/session.py"><code>backend/session.py</code></a></td>
+</tr>
+<tr>
+<td>Schema and chat routes</td>
+<td><a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/models.py"><code>backend/models.py</code></a>, <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/chat_models.py"><code>backend/chat_models.py</code></a>, <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/chat.py"><code>backend/chat.py</code></a></td>
+</tr>
+<tr>
+<td>Records and permissions</td>
+<td><a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/auth.py"><code>backend/auth.py</code></a>, <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/submissions.py"><code>backend/submissions.py</code></a>, <a href="https://github.com/Ekko-Technology/sustainability-report-rag/tree/2ad0e1f/supabase/migrations"><code>supabase/migrations/</code></a></td>
+</tr>
+<tr>
+<td>Controlled tests</td>
+<td><a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/eval/test_extraction.py"><code>backend/eval/test_extraction.py</code></a> (runner), <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/eval/metrics.py"><code>backend/eval/metrics.py</code></a> (metrics), <a href="https://github.com/Ekko-Technology/sustainability-report-rag/tree/2ad0e1f/backend/eval/dataset"><code>backend/eval/dataset/</code></a> (test cases), <a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/eval/README.md"><code>backend/eval/README.md</code></a> (how to run)</td>
+</tr>
+<tr>
+<td>Offline checks of the test setup</td>
+<td><a href="https://github.com/Ekko-Technology/sustainability-report-rag/blob/2ad0e1f/backend/tests/test_eval_support.py"><code>backend/tests/test_eval_support.py</code></a></td>
+</tr>
+<tr>
+<td>Evaluation results (Appendices C and D)</td>
+<td><a href="https://github.com/Ekko-Technology/sustainability-report-rag/tree/2ad0e1f/backend/eval/results/extraction-20261113-165816"><code>extraction-20261113-165816/</code></a> (r5), <a href="https://github.com/Ekko-Technology/sustainability-report-rag/tree/2ad0e1f/backend/eval/results/extraction-20261113-170211"><code>extraction-20261113-170211/</code></a> (r6)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<a class="back-to-top" href="#top">Back to top</a>
+</section>
+</div>
+</div>
+<section class="appendix" id="appendix-matrix"><header class="major"><h2>Appendix G: Weighted Concept-Selection Matrix</h2></header><p>The weighted decision matrix was refined following interim feedback to align evaluation more closely with the design constraints and project objectives. Ratings use a five-point scale and are based on the comparative capabilities and implementation trade-offs of each concept.</p><div class="table-wrapper"><table><thead><tr><th>Criterion</th><th>Weight</th><th>S1</th><th>S3</th><th>S5</th><th>S6</th><th>Rating rationale</th></tr></thead><tbody><tr><td>Source-level data quality</td><td>25%</td><td>3</td><td>1</td><td>5</td><td>5</td><td>S3 operates after collection; S5/S6 can ask for missing information.</td></tr><tr><td>Submission efficiency and usability</td><td>20%</td><td>4</td><td>4</td><td>3</td><td>3</td><td>Forms are familiar; chat can add turns, requiring empirical testing.</td></tr><tr><td>Reporting readiness</td><td>20%</td><td>3</td><td>4</td><td>3</td><td>5</td><td>S6 integrates storage and downstream reporting pathway.</td></tr><tr><td>Contextual adaptability</td><td>15%</td><td>2</td><td>1</td><td>5</td><td>5</td><td>Fixed forms and downstream-only processing cannot dynamically clarify.</td></tr><tr><td>Implementation feasibility</td><td>10%</td><td>5</td><td>4</td><td>4</td><td>3</td><td>S6 requires phased implementation to limit complexity.</td></tr><tr><td>Global scalability and integration</td><td>10%</td><td>4</td><td>4</td><td>4</td><td>4</td><td>All shortlisted concepts are software-based; operational integration remains untested.</td></tr><tr><td><strong>Weighted total (/5)</strong></td><td>100%</td><td><strong>3.35</strong></td><td><strong>2.80</strong></td><td><strong>4.00</strong></td><td><strong>4.30</strong></td><td>Calculated from revised ratings.</td></tr></tbody></table></div><p>Rating scale: 1 = poor, 2 = limited, 3 = moderate, 4 = strong and 5 = excellent. Weighted total = Σ(weight × rating). The scores represent comparative engineering assessments rather than experimental performance measurements.</p>
+
+
+
+<h3>Sensitivity analysis</h3>
+<p>S6 scores 4.30 and S5 scores 4.00, a difference of 0.30. S6 benefits from stronger reporting readiness, while S5 has lower implementation complexity. Moving 10 percentage points of weight from reporting readiness to implementation feasibility reduces the difference to zero; a 15-point transfer makes S5 lead by 0.15. This indicates that the preferred concept depends partly on how strongly reporting integration is prioritised relative to development simplicity.</p>
+
+<a class="back-to-top" href="#top">Back to top</a></section>
+<!-- ==================== SIDEBAR ==================== -->
+<!-- This sidebar is the same on every page. If you change it, change it in all three files. -->
+<div id="sidebar">
+<div class="inner">
+<nav id="menu">
+<header class="major">
+<h2>Contents</h2>
+</header>
+<ul>
+<li><a href="index.html#top">Home</a></li>
+<li>
+<span class="opener">1. Introduction</span>
+<ul>
+<li><a href="index.html#context">Context</a></li>
+<li><a href="index.html#objective">Objective</a></li>
+<li><a href="index.html#scope">Scope</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">2. Problem</span>
+<ul>
+<li><a href="index.html#problem">Problem statement</a></li>
+<li><a href="index.html#fishbone">Fishbone diagram</a></li>
+<li><a href="index.html#five-whys">Five whys</a></li>
+<li><a href="index.html#constraints">Constraints</a></li>
+<li><a href="index.html#specifications">Design specifications</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">3. Concept selection</span>
+<ul>
+<li><a href="index.html#literature">Literature review</a></li>
+<li><a href="index.html#funneling">Solution funnelling</a></li>
+<li><a href="index.html#workflow-coverage">Workflow coverage</a></li><li><a href="index.html#matrix">Weighted decision matrix</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">4. Solution</span>
+<ul>
+<li><a href="index.html#overview">Overview</a></li>
+<li><a href="index.html#architecture">System architecture</a></li>
+<li><a href="index.html#implementation">Implementation</a></li>
+<li><a href="index.html#iterations">Prototype iterations</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">5. Testing</span>
+<ul>
+<li><a href="index.html#testing-overview">Overview</a></li>
+<li><a href="index.html#sus">Usability</a></li>
+<li><a href="index.html#deepeval">Controlled testing</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">6. Areas for improvement and future development</span>
+<ul>
+<li><a href="index.html#limitations">Current limitations</a></li>
+<li><a href="index.html#immediate-improvements">Immediate improvements</a></li>
+<li><a href="index.html#future-expansion">Future expansion</a></li>
+<li><a href="index.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">Appendices</span>
+<ul>
+<li><a href="appendices.html#top">All appendices</a></li>
+<li><a href="appendices.html#appendix-schema">A. Schema and source mapping</a></li>
+<li><a href="appendices.html#appendix-prompt">B. System prompt</a></li>
+<li><a href="appendices.html#appendix-cases">C. Test case inventory</a></li>
+<li><a href="appendices.html#appendix-evaluation">D. Evaluation configuration</a></li>
+<li><a href="appendices.html#appendix-usability">E. Usability testing evidence</a></li>
+<li><a href="appendices.html#appendix-code">F. Source code guide</a></li><li><a href="appendices.html#appendix-matrix">G. Concept-selection scoring</a></li>
+</ul>
+</li>
+<li><a href="references.html#top">References</a></li>
+</ul>
+</nav>
+<!-- Team -->
+<section>
+<header class="major">
+<h2>Team</h2>
+</header>
+<ul class="alt">
+<li><strong>Ng Qian Xiong Adrian</strong> — Prototype development (primarily iterations 1 and 3); DeepEval controlled testing.</li>
+<li><strong>Shruti Moovendran</strong> — Prototype development (primarily iteration 2); stakeholder coordination, SUS testing and analysis.</li>
+<li><strong>Joint contributions</strong> — Problem analysis, concept selection, design decisions, prototype refinement and report preparation.</li>
+<li><strong>Supervisors</strong> — Keith Tan and Royston Shieh.</li>
+</ul>
+</section>
+<footer id="footer">
+<p class="copyright">© 2026, SSC-405 Elicit Green. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+</footer>
+</div>
+</div>
+</div>
+<!-- Template scripts: sidebar toggle and menu. No need to edit these. -->
+<script src="assets/js/site-navigation.js"></script>
+</body>
+</html>

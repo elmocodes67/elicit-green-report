@@ -1,0 +1,767 @@
+<!DOCTYPE HTML>
+
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+
+	HOW TO EDIT THIS PAGE
+	- Highlighted yellow text has class="todo". Replace the words, then delete class="todo".
+	- Images: put your file in assets/images/ and change src="assets/images/placeholder.svg".
+	- Always update the alt text too. It describes the image for screen readers.
+	- Colours live in assets/css/custom.css.
+	- See EDITING-GUIDE.md for more.
+-->
+<html lang="en">
+<head>
+<title>Report | Elicit Green CDE4301</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Elicit Green: an AI-assisted initiative information collection platform developed for Ascott CARES sustainability reporting." name="description"/>
+<link href="assets/css/main.css" rel="stylesheet"/>
+<link href="assets/css/custom.css" rel="stylesheet"/>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+<!-- ==================== MAIN CONTENT ==================== -->
+<div id="main">
+<div class="inner">
+<!-- Header bar: project name on the left, links on the right -->
+<header id="header">
+<a class="logo" href="#top"><strong>SSC-405 Interim Report</strong></a>
+<ul class="icons">
+<!-- Replace # with your links, or delete the line -->
+<li><a class="icon fa-github" href="https://github.com/Ekko-Technology/sustainability-report-rag" rel="noopener" target="_blank"><span class="label">GitHub repository</span></a></li>
+<li><a class="icon fa-file-text-o" href="index.html#top"><span class="label">Read project report</span></a></li>
+</ul>
+</header>
+<!-- ==================== BANNER ==================== -->
+<section id="banner">
+<div class="content">
+<header id="top">
+<h1>SSC-405 Elicit Green (CDE4301 Report)</h1>
+<p>AI-assisted information elicitation for sustainability reporting</p>
+</header>
+<p>Elicit Green supports Ascott property staff in recording sustainability initiatives through guided conversation. It identifies unclear information during submission, converts responses into structured records and allows staff to review them before saving. The current phase focuses on collection quality; broader HQ reporting is planned for the next phase.</p>
+<ul class="actions">
+<li><a class="button big" href="#introduction">Read more</a></li>
+</ul>
+</div>
+<!-- Hero image: a screenshot of your app or a team photo works well -->
+<span class="image object">
+<img alt="Elicit Green sustainability information elicitation logo" src="assets/images/elicit-green-logo.png"/>
+</span>
+</section>
+<!-- ==================== 1. INTRODUCTION ==================== -->
+<section id="introduction"><header class="major"><h2>1. Introduction</h2></header>
+<h3 id="context">Context</h3><p>Ascott Limited, the lodging business of CapitaLand Investment, collects sustainability initiatives from properties across its international portfolio. Its CARES framework covers Community, Alliance, Respect, Environment and Supply Chain. Property-level information contributes to sustainability monitoring and reporting. Existing submissions are collected through Microsoft Forms and subsequently reviewed and consolidated by sustainability teams, alongside established reporting tools and consultants. This project focuses on the quality of initiative information entering that workflow, rather than replacing existing reporting infrastructure.</p>
+<h3 id="objective">Objective</h3><p>Improve the completeness, consistency and reporting relevance of sustainability initiative submissions while keeping staff effort manageable and fitting existing reporting workflows.</p>
+<h3 id="scope">Scope</h3><div class="row"><div class="col-6 col-12-small"><h4>Phase 1 — current semester</h4><ul><li>Collect initiative information through guided conversation and relevant follow-up questions.</li><li>Extract a structured record and let property staff inspect and correct it.</li><li>Validate and save confirmed submissions with access controls.</li><li>Evaluate extraction reliability and preliminary usability.</li></ul></div><div class="col-6 col-12-small"><h4>Phase 2 — planned</h4><ul><li>Consolidate approved records across properties and standardise impact metrics.</li><li>Expand HQ dashboards and theme-driven initiative discovery.</li><li>Draft sustainability narratives for HQ review and approval.</li><li>Seek broader stakeholder input, including potential engagement with the Singapore Tourism Board.</li></ul></div></div><p>The prototype demonstrates a software-based approach to data collection; global deployment, production integration and automated publication of sustainability reports are outside the validated scope of Phase 1.</p></section>
+<!-- ==================== 2. PROBLEM ==================== -->
+<section id="problem"><header class="major"><h2>2. Problem</h2></header>
+<p>Ascott’s property initiative submissions contain missing details, inconsistent metrics and insufficient context. Sustainability teams consequently seek repeated clarification between properties and HQ before consolidating information for reporting. Ascott identified ambiguity in 19.7% of the reviewed 2025 submissions, reinforcing the need to improve information quality at the point of collection.</p>
+<h3 id="fishbone">Fishbone diagram</h3><figure><span class="image fit"><img alt="Fishbone diagram identifying possible causes of inconsistent initiative data across form design, people, process, measurement, technology and organisation" src="assets/images/fishbone.png"/></span><figcaption>Figure 2.1. Fishbone analysis of the factors contributing to incomplete and inconsistent initiative records across the reporting workflow.</figcaption></figure>
+<p>The fishbone analysis organises the problem into six interacting areas: form design, people, process, measurement, technology and organisation. In particular, free-text inputs and inconsistent units interact with varied staff interpretations and limited follow-up mechanisms. The five-whys analysis narrows these broader factors to a central process weakness: missing information is typically clarified after submission rather than during collection.</p><h3 id="five-whys">Five whys</h3><ol class="steps"><li>Why is report preparation time-consuming? Incomplete submissions require manual review and repeated follow-up before consolidation.</li><li>Why are clarifications and revisions needed? Different properties provide inconsistent metrics, omitted details and insufficient narrative context.</li><li>Why are these gaps not resolved before submission? Fixed form fields and open-ended responses offer limited initiative-specific guidance.</li><li>Why does the collection process fail to identify them? Clarification largely occurs downstream, after information has left the originating property.</li><li>What is the underlying design gap? Collection lacks an adaptive mechanism to clarify missing facts, structure the response and let submitters verify it before saving.</li></ol>
+<h3 id="constraints">Design constraints</h3><p>Constraints were formalised to connect the root-cause analysis to concept screening. They describe the requirements a viable approach should satisfy; they are not evidence that a particular concept has already passed deployment testing.</p>
+<div class="table-wrapper"><table><thead><tr><th>Constraint</th><th>Engineering justification and design implication</th></tr></thead><tbody>
+<tr><td><strong>C1. Source-level data collection</strong></td><td>Intervene while property staff still know the initiative details, reducing the risk that gaps propagate into downstream consolidation.</td></tr>
+<tr><td><strong>C2. Structured, retrievable output</strong></td><td>Convert submissions into machine-readable records with consistent fields, supporting later retrieval and reporting.</td></tr>
+<tr><td><strong>C3. Prototype feasibility</strong></td><td>Demonstrate a working collection and validation workflow within the FYP's available time, resources and technical capabilities.</td></tr>
+<tr><td><strong>C4. Manageable staff effort</strong></td><td>Collect richer information without excessive form-filling, repeated questions or unnecessary administrative work.</td></tr>
+<tr><td><strong>C5. Contextual reporting information</strong></td><td>Capture descriptions, participants, beneficiaries and partner roles alongside impact measures, preserving the meaning behind numbers.</td></tr>
+<tr><td><strong>C6. Global scalability</strong></td><td>Use a software-based approach suitable for geographically distributed properties without physical installations at each site; production-scale feasibility remains to be validated.</td></tr>
+</tbody></table></div>
+<h3 id="specifications">Design specifications</h3><p>The eight proposed specifications translate the project objective into measurable outcomes. Targets below are design goals rather than demonstrated results; not all were evaluated in Phase 1.</p>
+<div class="table-wrapper"><table><thead><tr><th>ID / requirement</th><th>Proposed target</th><th>Measurement approach</th></tr></thead><tbody>
+<tr><td>D1. Submission completeness</td><td>≥85%</td><td>Share of applicable required fields populated with valid information.</td></tr>
+<tr><td>D2. Information extraction accuracy</td><td>≥95%</td><td>Share of extracted fields matching manually verified ground truth.</td></tr>
+<tr><td>D3. Contextual questioning efficiency</td><td>≥85%</td><td>Share of follow-up questions judged relevant and necessary.</td></tr>
+<tr><td>D4. Information reliability</td><td>0% unsupported claims</td><td>Share of factual claims in extracted records lacking user support.</td></tr>
+<tr><td>D5. CARES classification accuracy</td><td>≥90%</td><td>Share correctly mapped to applicable CARES pillars and targets.</td></tr>
+<tr><td>D6. Submission efficiency and usability</td><td>&lt;6 minutes</td><td>Median completion time; SUS evaluated separately.</td></tr>
+<tr><td>D7. Narrative information sufficiency</td><td>≥90%</td><td>Share of submissions containing required reporting context.</td></tr>
+<tr><td>D8. Metric standardisation</td><td>≥70%</td><td>Share of equivalent metrics normalised without merging distinct measures.</td></tr>
+</tbody></table></div><p>The presentation lists a 12-minute median for the existing form and Ascott’s stakeholder-reported 19.7% ambiguity observation. These baselines measure different outcomes and should not be interpreted as direct comparisons with D1 or D2. The current tests prioritise D1, D2, D4 and D6; the remaining targets require further stakeholder-defined evaluation.</p></section>
+<!-- ==================== 3. CONCEPT SELECTION ==================== -->
+<section id="concept"><header class="major"><h2>3. Concept selection</h2></header>
+<h3 id="literature">Existing approaches and design gap</h3><p>The team examined the existing Ascott Microsoft Forms process and reporting tools, alongside examples of ESG platforms presented in the interim review: Greenview, Workiva Carbon, Watershed and Sweep. These illustrate different combinations of data collection, carbon accounting, validation, analytics and reporting. The presentation did not establish that conversational collection is unique to Elicit Green. Instead, the project's proposed contribution is to apply adaptive, initiative-specific questioning and source-level quality assurance to Ascott CARES submissions. Product feature comparisons require independently verified citations before being treated as a formal literature review.</p>
+<p><strong>Human factors in data collection.</strong> Answering a form requires respondents to interpret questions, recall details, form judgments and map them into response fields (Tourangeau et al., <a href="references.html#ref-tourangeau">2000</a>). Research on survey satisficing suggests that demanding questions can encourage lower-effort responses (Krosnick, <a href="references.html#ref-krosnick">1991</a>). These findings offer a plausible design rationale for contextual prompts and clarification, but they do <em>not</em> establish that Ascott staff are satisficing or that a chatbot necessarily produces better records. This remains a hypothesis for comparative testing.</p>
+<h3 id="funneling">Solution funnelling</h3><p>Six concepts were generated across data entry, collection, processing and reporting. Filter 1 screened practical and organisational fit, especially C3 (prototype feasibility) and C6 (global scalability). Filter 2 prioritised source-level quality (C1), structured records (C2) and initiative-specific context (C5). Filter 3 considered whether the remaining approaches could accommodate varied initiatives while keeping staff effort manageable (C4) and remaining achievable within the FYP. S1, S3, S5 and S6 were compared in greater detail; S6 was selected as a phased integration of the complementary strengths of S5 and S3.</p>
+<figure><span class="image fit"><img alt="Solution funnel showing three screening stages and selection of S6 from six initial concepts" src="assets/images/solution-funnel.png"/></span><figcaption>Figure 3.1. Solution funnel from six initial concepts to the integrated S6 approach.</figcaption></figure>
+<div class="table-wrapper"><table><thead><tr><th>Shortlisted concept</th><th>Contribution</th><th>Principal limitation / trade-off</th></tr></thead><tbody>
+<tr><td><strong>S1. Enhanced structured forms</strong></td><td>Improves consistency of initial field entry using clearer, more structured questions.</td><td>Fixed questions may not uncover gaps specific to a particular initiative.</td></tr>
+<tr><td><strong>S3. Automated data-processing pipeline</strong></td><td>Automates extraction, cleaning and consolidation after data is received.</td><td>Cannot reliably recover facts that were never provided by the submitter.</td></tr>
+<tr><td><strong>S5. AI conversational data collection</strong></td><td>Asks adaptive follow-up questions during submission, targeting missing context at its source.</td><td>Requires structured output, review controls and integration to make the collected information reliably reusable.</td></tr>
+<tr><td><strong>S6. Integrated AI sustainability platform</strong></td><td>Combines conversational collection, structured processing and a pathway to reporting.</td><td>Broadest implementation scope; staged delivery is needed to remain feasible.</td></tr>
+</tbody></table></div>
+<p>Across the end-to-end workflow, S1 primarily improves entry, S5 covers entry and clarification, and S3 covers downstream processing. S6 is an integrated architecture spanning collection, processing and reporting. The current prototype implements its collection and record-management foundation; the full reporting vision is planned, not yet validated.</p>
+<h3 id="workflow-coverage">Workflow coverage of shortlisted concepts</h3><figure><span class="image fit"><img alt="Comparison of workflow coverage: S1 addresses forms, S5 conversational collection, S3 downstream processing and S6 the full proposed workflow" src="assets/images/workflow-comparison.png"/></span><figcaption>Figure 3.2. Concept coverage across the end-to-end reporting workflow. S6 represents the intended architecture; its full reporting functions are planned for a later phase.</figcaption></figure>
+<h3 id="matrix">Weighted decision matrix</h3><p>Following the interim feedback, the team refined the weighted matrix to align concept evaluation with the engineering constraints and reporting objectives. The six criteria assess source-level data quality, staff usability, reporting readiness, adaptability, feasibility and scalability. The individual ratings and calculations are provided in Appendix G.</p>
+<div class="table-wrapper"><table><thead><tr><th>Evaluation criterion</th><th>Weight</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>Source-level data quality</td><td>25%</td><td>Prevention of missing or inconsistent information.</td></tr>
+<tr><td>Submission efficiency and usability</td><td>20%</td><td>Staff effort and avoidable repetition.</td></tr>
+<tr><td>Reporting readiness</td><td>20%</td><td>Structure, comparability and downstream usefulness.</td></tr>
+<tr><td>Contextual adaptability</td><td>15%</td><td>Coverage of diverse initiative types.</td></tr>
+<tr><td>Implementation feasibility</td><td>10%</td><td>Time, cost and development complexity.</td></tr>
+<tr><td>Global scalability and integration</td><td>10%</td><td>Software-based use across properties and compatibility with reporting workflows.</td></tr>
+</tbody></table></div>
+<p>Each concept is rated on a 1–5 scale. The weighted total is the sum of criterion weight multiplied by rating. Feasibility constraints are considered during initial screening, while the matrix compares the relative strengths of the shortlisted concepts.</p>
+<div class="table-wrapper"><table><thead><tr><th>Concept</th><th>Revised weighted score (/5)</th><th>Rank</th></tr></thead><tbody><tr><td>S1</td><td>3.35</td><td>3</td></tr><tr><td>S3</td><td>2.80</td><td>4</td></tr><tr><td>S5</td><td>4.00</td><td>2</td></tr><tr><td><strong>S6</strong></td><td><strong>4.30</strong></td><td><strong>1</strong></td></tr></tbody></table></div>
+<p>S6 achieves the highest revised weighted score because it combines source-level clarification with structured processing and a pathway to HQ reporting. S5 remains a strong alternative with lower implementation complexity. S6 was therefore adopted as a phased architecture: Phase 1 develops conversational collection, verification and record management, while broader reporting functions are reserved for Phase 2. Appendix G examines how the ranking responds to changes in the evaluation weights.</p></section>
+<!-- ==================== 4. SOLUTION ==================== -->
+<section id="solution">
+<header class="major">
+<h2>4. Solution</h2>
+</header>
+<h3 id="overview">Overview</h3>
+<p>
+							The objective of our approach is to give property staff
+							a way to clarify missing or unclear details while submitting an
+							initiative. They describe what happened in their words and chatbot
+							asks follow-up questions based on what they have shared. Information
+							is then organised into the reporting schema for the user to review before
+							submission. This aims to reduce fixed form entry and the need
+							for HQ to filter and chase for missing details, therefore addressing gaps
+							during data collection.
+						</p>
+<h3 id="architecture">System architecture</h3>
+<figure>
+<span class="image fit"><img alt="System architecture: React frontend, FastAPI backend, OpenAI or Claude model, and Supabase authentication and PostgreSQL database" src="assets/images/architecture.svg"/></span>
+<figcaption>Figure 4.1: System architecture</figcaption>
+</figure>
+<ul>
+<li><strong>Frontend</strong> – <span>Users chat, inspect the live record, and confirm submission. It signs in directly with Supabase Auth and sends the access token with every API request </span></li>
+<li><strong>Backend</strong> – <span>FastAPI sends the conversation and current draft to the selected AI provider. It validates the structured response through Pydantic before updating the in-memory draft and returns the reply and record. Note: Schema validation checks structure and constraints; it does not prove that the extracted facts are correct.</span></li>
+<li><strong>Authorisation</strong> – <span>The backend verifies the token with Supabase Auth and checks the account's approval status and role. Database access uses the signed-in user's token; row-level security (RLS) and guarded database functions called through RPC enforce access and write rules. The backend holds no service-role key.</span></li>
+<li><strong>Storage</strong> – <span>Chat drafts remain in backend memory and are lost on restart. Confirming submission validates and saves the initiative to PostgreSQL. Accounts, saved submissions, proposed edits, and review history persist in the database. Later submission edits require administrator approval.</span></li>
+</ul>
+<h3 id="implementation">Implementation</h3>
+<h4>1. Data collection and validation</h4>
+<figure>
+<span class="image fit"><img alt="Sequence diagram of one chat turn, from the user's message to the validated record and reply" src="assets/images/one_turn.svg"/></span>
+<figcaption>Figure 4.2: Proposed chat turn</figcaption>
+</figure>
+<p>
+						The sequence diagram shows how the application processes a single chat 
+						message. The frontend sends the message and selected model details to the 
+						backend, which checks account access and session ownership. It then locks 
+						the draft session to prevent simultaneous updates. The backend sends the prompt, 
+						conversation history, current draft and property context to the selected AI model.
+						This gives the model context to interpret new information while retaining previously collected facts. 
+						The model then returns a structured record, reply and collection status. The 
+						backend validates the record schema and follow-up question format before updating the 
+						draft. If validation fails, it preserves the previous draft and chat history and returns 
+						an error. This prevents an invalid response from overwriting previously collected information.
+						If validation succeeds, it updates both in memory and returns the updated record, 
+						reply and status to the frontend.
+						</p>
+<h5>Initiative Record Schema</h5>
+<p>
+						The Excel submission dataset provided the main fields for the initiative record, including initiative name, description, date, cluster or country, participating properties, impact measures and CARES pillar (<a href="references.html#ref-ascott-excel">Ascott Limited, 2025a</a>). Analysis of narratives in the 2025 sustainability report informed the finer details, particularly the distinction between participants, partners and beneficiaries (<a href="references.html#ref-ascott-report">Ascott Limited, 2025b</a>). Participants and beneficiaries are recorded by group and count, while partners are recorded by name and role. Impact measures are stored as a list containing the metric, value and unit, replacing the separate columns for volunteer hours, blood donors, waste collected and trees planted. This structure accommodates different initiatives while keeping their information consistent for later processing and reporting.
+						</p>
+<h5>Conversational Collection and Prompt Design</h5>
+<p>
+						The record schema defines the information the chatbot aims to collect. The system prompt guides the model to extract relevant facts from each message and ask follow-up questions about missing or unclear details. It instructs the chatbot to avoid repeating answered questions, accept corrections and leave information unknown when the user cannot provide it. Recording rules also distinguish planned benefits from achieved results and prevent unsupported quantities or dates from being added. These instructions guide the conversation towards a structured initiative record, although their effectiveness requires evaluation as they do not guarantee compliance (see <a href="#deepeval">Controlled scenarios: DeepEval</a>).
+						</p>
+<p>
+						The system prompt defines the following rules for collecting and
+						structuring initiative information.
+						</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th scope="col">Rule</th>
+<th scope="col">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collect one initiative at a time.</td>
+<td>Prevent details from different initiatives being mixed together.</td>
+</tr>
+<tr>
+<td>
+											Record only user-supplied facts. Preserve unknown values and
+											the precision of dates and quantities.
+										</td>
+<td>Avoid invented details and false certainty.</td>
+</tr>
+<tr>
+<td>
+											Preserve existing facts unless the user corrects or withdraws them.
+										</td>
+<td>
+											Prevent information loss while allowing corrections across
+											conversation turns.
+										</td>
+</tr>
+<tr>
+<td>Record participants, partners and beneficiaries separately.</td>
+<td>
+											Distinguish who participated, who helped deliver the initiative
+											and who benefited.
+										</td>
+</tr>
+<tr>
+<td>
+											Preserve metric values and units, keep distinct measures separate,
+											and avoid duplication or inferred calculations.
+										</td>
+<td>
+											Maintain the meaning of reported measurements and prevent
+											misleading totals.
+										</td>
+</tr>
+<tr>
+<td>Distinguish goals and planned benefits from achieved results.</td>
+<td>
+											Prevent intended outcomes being presented as measured impact.
+										</td>
+</tr>
+<tr>
+<td>
+											After the opening question, ask one relevant follow-up question
+											at a time. Do not repeatedly request answered or skipped information.
+										</td>
+<td>
+											Clarify gaps while limiting unnecessary questioning and user effort.
+										</td>
+</tr>
+<tr>
+<td>
+											Use approved cluster and property names, and clarify ambiguous matches.
+										</td>
+<td>
+											Keep records consistent without guessing which location the user means.
+										</td>
+</tr>
+<tr>
+<td>
+											Record an explicitly selected CARES pillar directly, but obtain
+											confirmation for an assistant suggestion.
+										</td>
+<td>Keep the classification under user control.</td>
+</tr>
+<tr>
+<td>
+											Return the complete updated record, chatbot reply and collection status.
+										</td>
+<td>Keep the live record and conversation aligned.</td>
+</tr>
+<tr>
+<td>
+											Stop collecting when the user confirms completion, preserving
+											known facts and accepted unknowns.
+										</td>
+<td>
+											Respect the user's decision to finish without inventing information
+											to fill remaining gaps.
+										</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5>Validation and Live Record Review</h5>
+<p>
+							Pydantic checks the record structure, data types and constraints, but these checks do not
+							establish factual correctness. Users inspect the live record and return to chat to correct
+							missing or misinterpreted information. During collection, the draft remains in backend
+							memory, keeping work in progress separate from saved submissions. These temporary drafts
+							are lost if the backend restarts. Submission confirmation is separate from finishing the
+							conversation and triggers final validation and database storage.
+						</p>
+<h4>2. Centralised record management and governance</h4>
+<figure>
+<span class="image fit"><img alt="Database schema diagram showing the account, submission and review tables" src="assets/images/supabase_schema.svg"/></span>
+<figcaption>Figure 4.3: Database schemas</figcaption>
+</figure>
+<p>
+						The platform uses a central PostgreSQL database hosted on Supabase to store accounts, initiative submissions and proposed changes. As shown in the database schema diagram, related tables separate account information, saved records and review decisions. This allows property staff and HQ to work from a shared set of records while retaining different access permissions.
+						</p>
+<h5>Submission Storage and Retrieval</h5>
+<p>
+						When a user confirms submission, the backend validates the initiative record and saves it in the submissions table. Each submission stores its owner, structured content, version number and creation and update timestamps. The initiative fields are held within a JSONB content column, preserving the record produced during collection. This stores the initiative as one structured document while accommodating lists of participants, partners, beneficiaries and impact measures that vary between initiatives. Partners can retrieve their own submissions, while consultants and administrators can view submissions across properties.
+						</p>
+<h5>Account Access and Permissions</h5>
+<p>
+						Supabase Auth manages sign-in and verifies user identity. The user and profiles tables hold account details, requested roles and approval status. The backend fills the submitter’s name, email and reporting property from the authenticated account, avoiding repeated entry and linking the submission to the account’s identity. Users must verify their email and receive administrator approval before accessing protected functions. Partners can submit initiatives and propose changes to their own records, consultants have read-only access to saved submissions, and administrators manage account requests and submission changes.
+						</p>
+<p>
+						The backend checks account status and permissions on each protected request. Database access uses the signed-in user’s token, allowing row-level security policies and database functions called through RPC to enforce ownership and role restrictions. These database checks also apply when requests bypass the application interface.
+						</p>
+<h5>Proposed Changes and Review History</h5>
+<p>
+						Changes to saved submissions are stored separately in submission_edits. Each proposal includes the previous and proposed content, a reason for the change and the submission version on which it was based. The saved submission remains unchanged while the proposal awaits review. Approval applies the proposed content; rejection preserves the existing record.
+						</p>
+<p>
+						The platform records the reviewer, decision status and review time, providing a history of submission changes. Version checks prevent proposals based on outdated records from overwriting newer content. Account approval decisions are recorded separately in account_reviews, supporting traceability for both account access and record changes.
+						</p>
+<h3 id="iterations">Prototype iterations</h3>
+<!-- One block per iteration. Copy a whole row to add another. -->
+<div class="row">
+<div class="col-4 col-12-medium">
+<span class="image fit"><img alt="Screenshot of iteration 1" src="assets/images/first.png"/></span>
+</div>
+<div class="col-8 col-12-medium">
+<h4>Iteration 1: Searching existing submissions</h4>
+<p>
+								The first prototype focused on finding initiatives within the 2025
+								Excel submission dataset. It supported access to existing information
+								but did not change how new initiatives were collected. Missing or
+								unclear details therefore remained dependent on the original submissions.
+								This limitation prompted a shift towards improving information
+								collection at its source.
+								</p>
+</div>
+</div>
+<div class="row">
+<div class="col-4 col-12-medium">
+<span class="image fit"><img alt="Screenshot of iteration 2" src="assets/images/second.png"/></span>
+</div>
+<div class="col-8 col-12-medium">
+<h4>Iteration 2: Details form and guided conversation</h4>
+<p>
+								The second prototype introduced a submission workflow in which partners
+								signed in, completed a Details form and described their initiative
+								through guided chat. Users could review the extracted record before
+								confirming submission. Follow-up questions aimed to clarify missing
+								information during collection. However, the separate form divided
+								the process into two stages. Other participating properties were
+								entered as free text, and choosing not to provide a story allowed
+								users to bypass conversational collection.
+								</p>
+</div>
+</div>
+<div class="row">
+<div class="col-4 col-12-medium">
+<span class="image fit"><img alt="Screenshot of iteration 3" src="assets/images/third.png"/></span>
+</div>
+<div class="col-8 col-12-medium">
+<h4>Iteration 3: Chat-only collection</h4>
+<p>
+								The final prototype removed the Details form and brought initiative
+								name, cluster or country, and other participating properties into
+								the conversation. Cluster and property values were constrained to
+								approved lists, with unclear names requiring clarification.
+								Every initiative passed through the guided conversation, followed
+								by record review and submission confirmation. This consolidated
+								collection into one workflow and reduced reliance on free-text
+								property names.
+								</p>
+</div>
+</div>
+<p>
+							The implementation combines guided questioning, structured extraction
+							and user review to address gaps during collection. These mechanisms
+							require evaluation because valid records may still contain missing
+							or misinterpreted information. The following section assesses extraction
+							accuracy and information reliability through controlled scenarios,
+							alongside perceived usability through user testing.
+						</p>
+</section>
+<!-- ==================== 5. TESTING ==================== -->
+<section id="testing">
+<header class="major">
+<h2>5. Testing</h2>
+</header>
+<h3 id="testing-overview">Overview</h3>
+<p>
+						Testing assessed whether the platform could capture complete and accurate
+						initiative information without introducing unsupported facts, while
+						keeping the submission process usable for property staff. Controlled
+						scenarios assessed extraction behaviour against predefined expected
+						records, while user testing assessed the submission experience.
+						The methods were linked to the following design specifications.
+						Supporting test materials and results are provided in
+						<a href="appendices.html#appendix-cases">Appendices C</a>
+						to <a href="appendices.html#appendix-usability">E</a>.
+						</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th scope="col">Design specification</th>
+<th scope="col">Testing purpose</th>
+<th scope="col">Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1: Submission completeness</td>
+<td>
+											Assess whether completed records contain all applicable
+											required information.
+										</td>
+<td>
+											Check completed records against a field checklist.
+										</td>
+</tr>
+<tr>
+<td>D2: Information extraction accuracy</td>
+<td>
+											Assess whether the system correctly extracts and structures
+											information supplied by the user.
+										</td>
+<td>
+											Controlled scenarios evaluated against expected records
+											using DeepEval.
+										</td>
+</tr>
+<tr>
+<td>D4: Information reliability</td>
+<td>
+											Assess whether extracted records contain unsupported
+											or fabricated facts.
+										</td>
+<td>
+											Controlled scenarios evaluated using exact checks
+											and AI-based fidelity criteria.
+										</td>
+</tr>
+<tr>
+<td>D6: Submission efficiency and usability</td>
+<td>
+											Assess how efficiently users complete a submission
+											and how usable they find the platform.
+										</td>
+<td>
+											Timed submission tasks and the System Usability Scale (SUS).
+										</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="sus">Usability</h3>
+<p>
+						User testing assessed the submission experience, supporting D6:
+						submission efficiency and usability. Participants completed a
+						sustainability initiative submission using Elicit Green, then
+						answered the standardised 10-item System Usability Scale (SUS)
+						questionnaire (<a href="references.html#ref-brooke">Brooke, 1996</a>) immediately afterwards.
+						</p>
+<p>
+						SUS assessed perceived usability. Submission time and facilitator-recorded field completeness were recorded separately; neither measure directly establishes downstream reporting readiness or a reduction in HQ clarification. The raw anonymised evidence and scoring are in Appendix E.
+						</p>
+<h4>Testing procedure</h4>
+<ol>
+<li>
+							Participants described an initiative through the chatbot,
+							reviewed the live record and confirmed submission.
+						</li>
+<li>
+							Participants completed the SUS questionnaire immediately
+							after the task.
+						</li>
+<li>
+							Questionnaire responses were converted into individual SUS
+							scores, then averaged within each participant group.
+						</li>
+</ol>
+<h4>Results</h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th scope="col">Participant group</th>
+<th scope="col">Number of participants</th>
+<th scope="col">Mean SUS score (0–100)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ascott</td>
+<td>2</td>
+<td>75.0</td>
+</tr>
+<tr>
+<td>Ridge</td>
+<td>2</td>
+<td>80.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+						The four individual SUS scores were 70, 75, 80 and 85 (overall mean 77.5). The Ascott group mean is 75.0 and Ridge group mean is 80.0, calculated by participant group rather than by preference grouping. Two respondents slightly preferred static forms and two preferred the chatbot. <a href="appendices.html#appendix-usability">Appendix E</a> provides the anonymised response matrix and scoring calculation. SUS scores describe perceived usability, rather than extraction
+						accuracy or submission completeness. Participant counts and
+						testing conditions should be considered when interpreting
+						differences between groups. The task instructions, questionnaire
+						and anonymised responses are provided in
+						<a href="appendices.html#appendix-usability">Appendix E</a>.
+						</p>
+<h3 id="deepeval">Controlled testing</h3>
+<p>
+							DeepEval is an open-source framework for evaluating LLM applications
+							(Confident AI, <a href="references.html#ref-deepeval">n.d.-a</a>, <a href="references.html#ref-deepeval-software">2026</a>).
+							It supports evaluation datasets, single-turn and multi-turn testing,
+							built-in and custom metrics, and automated tests through pytest.
+							Evaluation can target an entire application or individual components.
+							For this project, we use predefined test cases to assess the chatbot's
+							information extraction component. A custom code-based metric checks
+							structured facts, while two G-Eval metrics (<a href="references.html#ref-liu-geval">Liu et al., 2023</a>) use an LLM judge to assess
+							the meaning of descriptions and labels. Scores, explanations and
+							passing thresholds help identify errors and compare performance
+							across prompt revisions.
+						</p>
+<h4 id="evaluation-workflow">Evaluation workflow</h4>
+<figure>
+<span class="image fit"><img alt="Flowchart of the evaluation process: load test cases, run extraction, select applicable metrics and collect scores" src="assets/images/eval.svg"/></span>
+<figcaption>Figure 5.1: DeepEval workflow</figcaption>
+</figure>
+<p>
+							Our goldens contain predefined user inputs and expected initiative
+							records. For each case, we run the application's extraction code
+							to generate an actual record. DeepEval evaluates this record using
+							the metrics applicable to the expected fields, producing scores
+							and explanations. A case passes when every selected metric meets
+							its threshold. The test cases and their results are listed in
+							<a href="appendices.html#appendix-cases">Appendix C</a>, and the
+							system prompt being tested is reproduced in
+							<a href="appendices.html#appendix-prompt">Appendix B</a>.
+						</p>
+<p>
+							Failed cases are reviewed to distinguish extraction errors from
+							problems in the expected records or evaluation criteria.
+							Where justified, we revise the prompt, implementation or test
+							labels and rerun the evaluation. Thresholds remain fixed, and
+							unresolved failures are reported separately
+							(<a href="appendices.html#appendix-cases">Appendix C</a>). The
+							revisions made and the counts before and after are summarised in
+							<a href="appendices.html#appendix-evaluation">Appendix D</a>.
+						</p>
+<h4 id="evaluation-metrics">Evaluation metrics</h4>
+<p>
+							Each test case uses the metrics applicable to its expected record.
+							A case passes only when every selected metric meets its threshold.
+						</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th scope="col">Metric</th>
+<th scope="col">What it evaluates</th>
+<th scope="col">How it works</th>
+<th scope="col">Passing threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field Exact Match</td>
+<td>
+											Structured facts, including dates, CARES pillar, counts,
+											partner names and metric values.
+										</td>
+<td>
+											Custom code compares expected fields with the extracted record.
+											Text is normalised for casing and surrounding spaces, while
+											list order is ignored. The score is the proportion of evaluated
+											fields that match.
+										</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Label Fidelity</td>
+<td>
+											Participant and beneficiary groups, partner roles,
+											metric names and units.
+										</td>
+<td>
+											A G-Eval AI judge (gpt-4.1-mini) checks whether labels preserve the expected
+											meaning and remain paired with the correct counts, values,
+											units or partner names. Equivalent wording is accepted;
+											missing, changed or unsupported information is penalised.
+										</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td>Description Fidelity</td>
+<td>
+											The factual meaning of the initiative description.
+										</td>
+<td>
+											A G-Eval AI judge (gpt-4.1-mini) compares the actual and expected descriptions,
+											using the input to check factual support. Paraphrasing is
+											accepted, but expected facts must be preserved and unsupported
+											details must not be added.
+										</td>
+<td>0.7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+						These thresholds are configured for this project. A score of 0.7
+						is a passing criterion, not a claim of 70% extraction accuracy.
+						The judges' evaluation steps, the Field Exact Match rules and the
+						recorded run configuration are given in
+						<a href="appendices.html#appendix-evaluation">Appendix D</a>; the
+						evaluation code is linked in
+						<a href="appendices.html#appendix-code">Appendix F</a>.
+						</p>
+</section>
+<!-- ==================== 6. AREAS FOR IMPROVEMENT AND FUTURE DEVELOPMENT ==================== -->
+<section id="improvements">
+<header class="major">
+<h2>6. Areas for improvement and future development</h2>
+</header>
+<h3 id="limitations">Current limitations</h3>
+<p>Interim usability testing placed considerable emphasis on submission time, although the principal project challenge is the quality and reporting relevance of collected information. Faster submission does not necessarily reduce missing details or downstream clarification. The four-participant study provides preliminary usability evidence but does not directly measure HQ reporting readiness. Final prototype testing will therefore prioritise record completeness, contextual questioning and the number of clarifications required after submission.</p>
+<p>
+							The evaluation provides preliminary evidence of the platform's
+							performance. Usability testing involved four participants, while
+							controlled scenarios covered a limited range of initiative inputs.
+							These findings cannot establish performance across the wider property
+							workforce or all initiative types. The extraction metrics also assess
+							records rather than independently evaluating the relevance and
+							efficiency of the chatbot's follow-up questions.
+						</p>
+<p>DeepEval's language-model evaluators compare extracted descriptions and labels with expected records using predefined scoring criteria. Because these evaluators can interpret wording differently across runs, their scores are reviewed alongside deterministic field checks. Reporting conventions, metric definitions and evaluation targets will also be refined with stakeholders.</p>
+<h3 id="immediate-improvements">Immediate improvements</h3>
+<p><strong>Final-phase evaluation redesign.</strong> Matched initiative scenarios will be submitted through both the current static form and the conversational prototype, ideally with comparable participants and counterbalanced order. Independent reviewers will assess completeness of applicable fields, ambiguous or unsupported claims, contextual sufficiency and the number of HQ clarification requests needed before a record is reporting-ready. Conversation logs will be assessed for relevant follow-ups, repetition and correct handling of unknown values. Submission time and SUS will be retained as secondary measures to detect excess staff burden, not as the primary success criteria. The evaluation protocol, scoring rubric and participant recruitment will be agreed before testing.</p>
+<p>
+							Further testing should use broader scenarios informed by property
+							staff and HQ, including incomplete descriptions, ambiguous
+							measurements and corrections across multiple turns. Conversation-level
+							assessment should examine whether the chatbot asks necessary questions,
+							avoids repetition and preserves information as the discussion develops.
+							A larger usability sample would provide a stronger basis for assessing
+							the submission experience.
+						</p>
+<p>
+							Expected records and scoring criteria should be reviewed before
+							subsequent evaluations. Each run should record the prompt, model,
+							dataset and evaluation settings so that changes can be traced.
+							Stakeholder review should also refine the design specifications and
+							establish agreed metric names, units and reporting requirements.
+						</p>
+<h3 id="future-expansion">
+							Future expansion <span class="status planned">Planned</span>
+</h3>
+<p>
+							Once collection quality and reporting conventions are better
+							established, development can extend towards the HQ workflow.
+							Planned capabilities include broader aggregation across properties,
+							expanded sustainability indicators, and dashboards for monitoring
+							performance against targets. These would build on the preliminary
+							reporting dashboard already implemented.
+						</p>
+<p>
+							A later stage could use the collected records to generate draft
+							sustainability narratives for HQ to review, refine and approve.
+							These extensions remain as future work and have not been validated 
+							through the current extraction tests.
+						</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>
+							Elicit Green brings guided conversation, structured extraction,
+							user review and submission management into one platform.
+							It gives property staff an opportunity to clarify information
+							before it enters the shared submission records. Broader evaluation
+							and stakeholder input are needed to determine whether this approach
+							reduces reporting effort and improves data quality in practice.
+							Strengthening this foundation will support future development
+							towards HQ analysis and reporting.
+						</p>
+</section>
+</div>
+</div>
+<!-- ==================== SIDEBAR ==================== -->
+<!-- This sidebar is the same on every page. If you change it, change it in all three files. -->
+<div id="sidebar">
+<div class="inner">
+<nav id="menu">
+<header class="major">
+<h2>Contents</h2>
+</header>
+<ul>
+<li><a href="index.html#top">Home</a></li>
+<li>
+<span class="opener">1. Introduction</span>
+<ul>
+<li><a href="index.html#context">Context</a></li>
+<li><a href="index.html#objective">Objective</a></li>
+<li><a href="index.html#scope">Scope</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">2. Problem</span>
+<ul>
+<li><a href="index.html#problem">Problem statement</a></li>
+<li><a href="index.html#fishbone">Fishbone diagram</a></li>
+<li><a href="index.html#five-whys">Five whys</a></li>
+<li><a href="index.html#constraints">Constraints</a></li>
+<li><a href="index.html#specifications">Design specifications</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">3. Concept selection</span>
+<ul>
+<li><a href="index.html#literature">Literature review</a></li>
+<li><a href="index.html#funneling">Solution funnelling</a></li>
+<li><a href="index.html#workflow-coverage">Workflow coverage</a></li><li><a href="index.html#matrix">Weighted decision matrix</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">4. Solution</span>
+<ul>
+<li><a href="index.html#overview">Overview</a></li>
+<li><a href="index.html#architecture">System architecture</a></li>
+<li><a href="index.html#implementation">Implementation</a></li>
+<li><a href="index.html#iterations">Prototype iterations</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">5. Testing</span>
+<ul>
+<li><a href="index.html#testing-overview">Overview</a></li>
+<li><a href="index.html#sus">Usability</a></li>
+<li><a href="index.html#deepeval">Controlled testing</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">6. Areas for improvement and future development</span>
+<ul>
+<li><a href="index.html#limitations">Current limitations</a></li>
+<li><a href="index.html#immediate-improvements">Immediate improvements</a></li>
+<li><a href="index.html#future-expansion">Future expansion</a></li>
+<li><a href="index.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li>
+<span class="opener">Appendices</span>
+<ul>
+<li><a href="appendices.html#top">All appendices</a></li>
+<li><a href="appendices.html#appendix-schema">A. Schema and source mapping</a></li>
+<li><a href="appendices.html#appendix-prompt">B. System prompt</a></li>
+<li><a href="appendices.html#appendix-cases">C. Test case inventory</a></li>
+<li><a href="appendices.html#appendix-evaluation">D. Evaluation configuration</a></li>
+<li><a href="appendices.html#appendix-usability">E. Usability testing evidence</a></li>
+<li><a href="appendices.html#appendix-code">F. Source code guide</a></li><li><a href="appendices.html#appendix-matrix">G. Concept-selection scoring</a></li>
+</ul>
+</li>
+<li><a href="references.html#top">References</a></li>
+</ul>
+</nav>
+<!-- Team -->
+<section>
+<header class="major">
+<h2>Team</h2>
+</header>
+<ul class="alt">
+<li><strong>Ng Qian Xiong Adrian</strong> — Prototype development (primarily iterations 1 and 3); DeepEval controlled testing.</li>
+<li><strong>Shruti Moovendran</strong> — Prototype development (primarily iteration 2); stakeholder coordination, SUS testing and analysis.</li>
+<li><strong>Joint contributions</strong> — Problem analysis, concept selection, design decisions, prototype refinement and report preparation.</li>
+<li><strong>Supervisors</strong> — Keith Tan and Royston Shieh.</li>
+</ul>
+</section>
+<footer id="footer">
+<p class="copyright">© 2026, SSC-405 Elicit Green. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+</footer>
+</div>
+</div>
+</div>
+<!-- Template scripts: sidebar toggle and menu. No need to edit these. -->
+<script src="assets/js/site-navigation.js"></script>
+</body>
+</html>
