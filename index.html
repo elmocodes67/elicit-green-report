@@ -273,8 +273,14 @@
 						</p>
 <h4>2. Centralised record management and governance</h4>
 <figure>
-<span class="image fit"><img alt="Database schema diagram showing the account, submission and review tables" src="assets/images/supabase_schema.svg"/></span>
-<figcaption>Figure 4.3: Database schemas</figcaption>
+  <div style="width:100%; overflow:hidden; text-align:center;">
+    <img
+      src="assets/images/supabase_schema.svg"
+      alt="Database schema showing accounts, profiles, submissions and review relationships"
+      style="display:block; width:100%; height:auto; max-width:100%; object-fit:contain;"
+    />
+  </div>
+  <figcaption>Figure 4.3: Database schemas</figcaption>
 </figure>
 <p>
 						The platform uses a central PostgreSQL database hosted on Supabase to store accounts, initiative submissions and proposed changes. As shown in the database schema diagram, related tables separate account information, saved records and review decisions. This allows property staff and HQ to work from a shared set of records while retaining different access permissions.
